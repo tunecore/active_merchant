@@ -43,6 +43,7 @@ module ActiveMerchant #:nodoc:
         add_currency(post, money, options)
         add_taxes(post, options)
         add_processor(post, options)
+        add_cvv(post, options)
         commit('sale', money, post)
       end
 
@@ -205,6 +206,10 @@ module ActiveMerchant #:nodoc:
 
       def add_transaction(post, auth)
         post[:transactionid] = auth
+      end
+
+      def add_cvv(post, options)
+        post[:cvv] = options[:cvv] if options[:cvv]
       end
 
       def parse(body)
